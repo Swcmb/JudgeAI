@@ -37,7 +37,7 @@ class BaiLianAPIClient:
             base_url=base_url
         )
         
-        self.model = "qwen-flash"
+        self.model = "qwen-plus"  # 修正模型名称
         self.max_retries = 3
         self.retry_delay = 1  # 秒
     
@@ -123,7 +123,7 @@ class BaiLianAPIClient:
                 ]
                 
                 completion = self.client.chat.completions.create(
-                    model="qwen-plus-2025-09-11",  # 使用支持思考的模型
+                    model=self.model,  # 使用配置的模型
                     messages=messages,
                     temperature=0.3,  # 降低随机性，提高一致性
                     # 启用思考过程

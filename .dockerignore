@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+.git/
+*.db
+*.log
+test_*
+uploads/
+.codebuddy/
+.kiro/
+*.md
+!README.md
+!requirements.txt

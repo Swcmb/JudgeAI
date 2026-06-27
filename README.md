@@ -1,348 +1,500 @@
-# 算法竞赛团队AI评分系统
+# JudgeAI - 企业级AI智能评分系统 🚀
 
-一个基于阿里云百炼qwen-plus模型的智能评分系统，专门用于评估学生是否适合参加算法竞赛团队。系统支持处理真实的申请表数据，提供深度AI分析和四维度综合评分。
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-14+-black.svg)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue.svg)](https://typescriptlang.org)
+[![Python](https://img.shields.io/badge/python-3.8+-green.svg)](https://python.org)
+[![AI](https://img.shields.io/badge/AI-多模型支持-orange.svg)](https://dashscope.aliyun.com)
 
-## 🎯 项目概述
+## 📋 项目简介
 
-本系统能够自动处理学生申请表信息，通过AI深度思考进行四维度评分，为算法竞赛团队选拔提供科学的评估依据。
+JudgeAI是一个功能完整的企业级AI智能评分平台，专门用于评估学生是否适合参加算法竞赛团队。项目采用现代化的API架构，提供REST API接口、数据可视化、异步处理、多模型支持等高级功能。
 
-### 核心功能
-- 🧠 **AI深度思考评分**: 启用思考过程，提供详细分析推理
-- 📊 **四维度评估**: 学习态度、自学能力、算法基础、团队合作
-- 📁 **真实数据处理**: 专门适配ApplicationForm.xlsx申请表格式
-- 🎮 **交互式界面**: 用户友好的选择菜单和操作流程
-- 📈 **多格式输出**: CSV、Excel、JSON、统计报告等多种格式
+### 🎯 核心价值
+- **智能化评估**: 基于先进AI模型，提供客观、公正的评分
+- **全栈架构**: 支持传统Flask和现代Next.js两种部署方式
+- **企业级特性**: 完整的用户管理、权限控制、审计日志
+- **高度可定制**: 灵活的评分维度和模板系统
+- **高性能设计**: 异步处理、智能缓存、批量优化
 
-## 📋 评分标准
+## ✨ 核心特性
+
+### 🎯 AI智能评分
+- 🧠 **深度思考评分**: 基于阿里云百炼qwen-plus模型，启用AI深度思考功能
+- 📊 **四维度评估**: 学习态度、自学能力、算法基础、团队合作能力（每维度25分）
+- 🎯 **智能分析**: 详细推理过程，客观公正的评分理由
+- ⚙️ **自定义评分**: 支持自定义评分维度、权重和标准
+
+### 🌐 现代化API接口
+- 📡 **REST API**: 完整的RESTful API接口，支持JSON格式
+- 📚 **API文档**: 详细的API文档和SDK示例
+- 🔌 **第三方集成**: 支持与其他系统无缝集成
+- 📡 **Webhook支持**: 事件驱动的通知机制
+
+### ⚡ 高性能架构
+- 🚀 **异步处理**: 大文件异步处理，支持1000+并发用户
+- 🗄️ **智能缓存**: API结果缓存，减少重复调用，提升性能
+- 📈 **批量优化**: 批量请求处理，智能频率控制
+- 🔧 **任务管理**: 完整的任务队列和进度追踪系统
+
+### 🔒 企业级安全
+- 🔐 **JWT认证**: 安全的用户认证和授权机制
+- 👥 **权限管理**: 基于角色的访问控制（RBAC）
+- 📝 **审计日志**: 完整的操作审计和变更追踪
+- 🔒 **数据加密**: 敏感数据加密存储和传输
+
+### 🔌 开放API生态
+- 🌐 **REST API**: 完整的RESTful API接口
+- 📚 **API文档**: 详细的API文档和SDK示例
+- 🔗 **第三方集成**: 支持与其他系统无缝集成
+- 📡 **Webhook支持**: 事件驱动的通知机制
+
+## 🚀 快速开始
+
+JudgeAI提供基于API的部署方式，专注于后端服务。
+
+### 📋 系统要求
+
+- Python 3.8+
+- 阿里云百炼API密钥
+- 4GB+ RAM（推荐）
+
+### ⚡ 一键启动
+
+```bash
+# 安装依赖
+pip install -r requirements.txt
+
+# 设置API密钥
+export DASHSCOPE_API_KEY="your_api_key_here"
+export JWT_SECRET_KEY="your_jwt_secret_key"
+
+# 启动API服务器
+python quick_start.py
+```
+API访问: http://localhost:5000/api
+
+### 📖 详细文档
+
+| 文档类型 | 描述 | 链接 |
+|---------|------|------|
+| 📚 **完整使用指南** | 系统详细使用说明 | [查看文档](./COMPLETE_USER_GUIDE.md) |
+| 🔌 **API文档** | 完整REST API接口说明和示例 | [查看文档](./API_DOCUMENTATION.md) |
+| 🔧 **功能扩展指南** | 高级功能配置和自定义说明 | [查看文档](./EXTENSION_GUIDE.md) |
+
+## 📊 评分标准
 
 系统基于以下四个维度进行评分，每个维度25分，总分100分：
 
-### 1. 学习态度（25分）
-- **20-25分**: 积极主动、有强烈学习意愿，如提到主动学习新知识、参加培训课程等
+### 📚 学习态度（25分）
+- **20-25分**: 积极主动、有强烈学习意愿，主动学习新知识
 - **10-19分**: 学习态度一般，需要督促，但有一定学习意愿
-- **0-9分**: 态度消极、缺乏学习动力，表现出被动学习特征
+- **0-9分**: 态度消极、缺乏学习动力
 
-### 2. 自学能力（25分）
-- **20-25分**: 具备独立解决问题能力，如描述了自学经历、解决难题过程等
-- **10-19分**: 有一定自学能力但需要指导，能够在帮助下学习新知识
-- **0-9分**: 依赖他人指导较多，缺乏独立学习能力
+### 💡 自学能力（25分）
+- **20-25分**: 具备独立解决问题能力，有自学经历
+- **10-19分**: 有一定自学能力但需要指导
+- **0-9分**: 依赖他人指导较多
 
-### 3. 算法基础（25分）
-- **20-25分**: 有算法知识储备，如提及相关课程学习、算法竞赛经历等
-- **10-19分**: 有一定编程基础但算法经验不足，了解基本概念
-- **0-9分**: 算法基础薄弱或零基础，但如果有强烈学习意愿可适当给分
+### 🔧 算法基础（25分）
+- **20-25分**: 有算法知识储备，有竞赛经历
+- **10-19分**: 有一定编程基础但算法经验不足
+- **0-9分**: 算法基础薄弱或零基础
 
-### 4. 团队合作能力（25分）
-- **20-25分**: 能有效合作、沟通顺畅，如分享了团队项目经验、协作成果等
+### 👥 团队合作能力（25分）
+- **20-25分**: 能有效合作、沟通顺畅，有团队项目经验
 - **10-19分**: 有一定合作意识，能够参与团队活动
-- **0-9分**: 团队合作能力欠佳，更倾向于独立工作
+- **0-9分**: 团队合作能力欠佳
 
-### 特别评分注意事项
-- 如果学生明确表示"编程0基础"但有强烈学习意愿，算法基础可给5-10分，学习态度可给较高分
-- 如果学生有竞赛经验（如信息竞赛、编程猫等），算法基础应给较高分
-- 考虑学生的未来规划是否与算法竞赛相关（如考研、进大厂等）
-- 从个人优势中判断学生的学习能力和态度
-- 重点关注学生的学习意愿和潜力，而不仅仅是当前的技术水平
+## 🛠️ 核心模块
 
-## 🛠️ 安装配置
+### 🌉 API网关 (`api_gateway.py`)
+- 完整的REST API接口
+- 第三方集成支持，Webhook通知
+- API文档，SDK示例
 
-### 系统要求
-- Python 3.8+
-- 阿里云百炼API密钥
+### 🤖 AI评分引擎 (`enhanced_api_client.py`)
+- 增强版API客户端，支持缓存和批量处理
+- 智能重试机制，错误处理优化
+- 多模型支持，自定义评分模板
 
-### 安装步骤
+### ⚡ 异步任务管理 (`async_task_manager.py`)
+- 多线程异步任务处理
+- 任务队列、进度追踪、状态管理
+- 支持大规模并发评分
 
-1. **安装依赖包**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 🔒 安全管理 (`enhanced_security.py`)
+- JWT认证、数据加密、权限控制
+- 用户管理、审计日志、会话管理
+- Flask安全集成中间件
 
-2. **设置API密钥**
-   
-   **Windows PowerShell:**
-   ```powershell
-   $env:DASHSCOPE_API_KEY="your_api_key_here"
-   ```
-   
-   **Linux/Mac:**
-   ```bash
-   export DASHSCOPE_API_KEY=your_api_key_here
-   ```
+### ⚙️ 配置管理 (`enhanced_config_manager.py`)
+- 动态配置管理，自定义评分维度
+- 评分模板系统，配置变更追踪
+- 配置导入导出，实时更新
 
-3. **准备数据文件**
-   - 确保ApplicationForm.xlsx文件在项目根目录
-   - 或准备其他格式的学生信息文件
+### 🌉 API网关 (`api_gateway.py`)
+- 完整的REST API接口
+- 第三方集成支持，Webhook通知
+- API文档，SDK示例
 
-## 🚀 使用方法
+## 📱 移动端支持
 
-### 方法一：处理真实申请表数据（推荐）
+### API特性
+- 📱 响应式API设计，支持移动端调用
+- 🔄 RESTful接口，易于移动端集成
+- 📊 JSON格式数据，便于移动端处理
+- 🔌 标准HTTP接口，跨平台兼容
 
-```powershell
-python process_application_form_interactive.py
+## 🔌 API集成
+
+### 认证
+```bash
+curl -X POST http://localhost:5000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "admin", "password": "password"}'
 ```
 
-运行后会显示交互式菜单：
-```
-🤖 是否开始AI评分？
-请选择:
-1. 开始AI评分（处理前5个学生作为示例）
-2. 开始AI评分（处理所有91个学生）
-3. 仅查看数据，不进行评分
-0. 退出程序
-
-请输入选择 (0-3):
-```
-
-### 方法二：处理自定义格式数据
-
-```powershell
-# 创建示例数据
-python main.py --create-sample
-
-# 处理示例数据
-python main.py -i sample_students.csv
-
-# 处理自定义文件
-python main.py -i your_data.xlsx -o results
-
-# 查看帮助信息
-python main.py --help
+### 提交评分任务
+```bash
+curl -X POST http://localhost:5000/api/v1/scoring/submit \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "students": [
+      {
+        "id": "001",
+        "name": "张三",
+        "content": "我是一名计算机专业的学生..."
+      }
+    ],
+    "async": true
+  }'
 ```
 
-### 方法三：测试AI思考功能
-
-```powershell
-python test_thinking.py
+### 查询任务状态
+```bash
+curl -X GET http://localhost:5000/api/v1/tasks/{task_id} \
+  -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-## 📊 数据格式说明
+## 📊 数据格式
 
-### ApplicationForm.xlsx格式（推荐）
-系统专门适配的真实申请表格式：
-```
-序号 | 9、个人优势 | 10、未来规划 | 11、其他
-1    | 爱学习      | 好好学习     | (空)
-2    | 动手能力强  | 考研         | (空)
-```
+### 支持的文件格式
+- 📄 **CSV**: 逗号分隔值文件
+- 📊 **Excel**: .xlsx/.xls 文件
+- 📋 **JSON**: 结构化数据文件
+- 📝 **TXT**: 纯文本文件
 
-### 其他支持格式
-
-**CSV格式:**
-```csv
-学号,姓名,个人介绍
-2021001,张三,我对算法竞赛非常感兴趣...
-```
-
-**Excel格式:**
-```
-学号 | 姓名 | 个人介绍
-001  | 张三 | 详细的个人信息...
-```
-
-**JSON格式:**
+### 数据格式示例
 ```json
 [
   {
     "id": "001",
     "name": "张三",
-    "content": "个人信息描述..."
+    "content": "我是一名计算机专业的学生，对算法竞赛很感兴趣...",
+    "template_id": "custom_template"
   }
 ]
 ```
 
-**TXT格式:**
-```
-每行一个学生的信息描述
-系统会自动分配编号
-```
-
 ## 📈 输出结果
 
-系统会生成以下文件：
+系统会生成多格式的评分结果：
 
-### 1. CSV文件 (评分结果_时间戳.csv)
-包含所有学生的基本信息、AI思考过程和评分结果的表格文件。
-
-### 2. Excel文件 (评分结果_时间戳.xlsx)
-多工作表的详细分析报告：
-- **评分结果**: 主要评分信息
+### 📊 Excel报告
+- **评分结果**: 主要评分信息和统计数据
 - **详细评分**: 四个维度的详细分数和理由
-- **统计信息**: 整体统计分析
+- **分析图表**: 可视化图表和趋势分析
 
-### 3. JSON文件 (评分结果_时间戳.json)
-包含完整AI响应的原始数据文件，便于进一步分析。
+### 📄 CSV数据
+- 结构化的评分数据，便于进一步处理
+- 包含AI思考过程和评分理由
 
-### 4. 统计报告 (评分报告_时间戳.txt)
-文本格式的统计分析报告：
-- 总体统计信息
-- 各维度平均分
-- 推荐学生名单（前5名）
-- 需要关注的学生（后5名）
+### 📋 JSON格式
+- 完整的API响应数据
+- 便于系统集成和二次开发
 
-### 输出示例
-```
-🎉 评分完成！生成的文件:
-  CSV: application_form_results/评分结果_20241218_200000.csv
-  EXCEL: application_form_results/评分结果_20241218_200000.xlsx
-  JSON: application_form_results/评分结果_20241218_200000.json
-  REPORT: application_form_results/评分报告_20241218_200000.txt
+### 📑 统计报告
+- 整体统计分析
+- 推荐学生名单
+- 改进建议
 
-📊 评分统计:
-  成功评分: 91/91
-  平均分: 67.3
-  最高分: 89
-  最低分: 42
-```
+## 🔧 高级配置
 
-## 🔧 高级功能
+### 环境变量
+```bash
+# 必需配置
+export DASHSCOPE_API_KEY="your_dashscope_api_key"
+export JWT_SECRET_KEY="your_jwt_secret_key"
 
-### 命令行参数
-
-```powershell
-# 基本参数
-python main.py -i input_file -o output_dir
-
-# 完整参数列表
-python main.py \
-  --input file1.csv file2.xlsx \     # 输入文件（支持多个）
-  --output results \                 # 输出目录
-  --api-key your_key \              # API密钥
-  --log-level DEBUG                 # 日志级别
+# 可选配置
+export ADMIN_USERNAME="admin"
+export ADMIN_PASSWORD="admin123"
+export ADMIN_EMAIL="admin@example.com"
 ```
 
-### 批量处理
+### 自定义评分维度
+```python
+from enhanced_config_manager import get_enhanced_config_manager
 
-```powershell
-# 处理多个文件
-python main.py -i file1.csv file2.xlsx file3.json
+config_manager = get_enhanced_config_manager()
 
-# 处理整个目录的文件
-python main.py -i *.csv -o batch_results
+# 创建自定义维度
+dimension_id = config_manager.create_custom_dimension(
+    name="创新思维",
+    weight=0.2,
+    max_score=20,
+    description="评估学生的创新能力和思维方式",
+    scoring_criteria=[
+        {"range": "16-20", "description": "具有很强创新能力"},
+        {"range": "10-15", "description": "有一定创新意识"},
+        {"range": "0-9", "description": "创新能力较弱"}
+    ],
+    created_by="admin"
+)
 ```
 
-### 自定义配置
-
-可以通过修改以下文件来自定义系统行为：
-- `api_client.py`: 修改AI评分逻辑和提示词
-- `result_processor.py`: 自定义输出格式和统计方式
-- `process_application_form_interactive.py`: 调整评分标准
-
-## 🚨 故障排除
-
-### 常见问题
-
-#### 1. API密钥错误
-```
-错误: 未设置API密钥
-```
-**解决方案**: 
-```powershell
-$env:DASHSCOPE_API_KEY="your_actual_api_key"
-```
-
-#### 2. 文件读取失败
-```
-错误: 文件不存在或格式不支持
-```
-**解决方案**: 
-- 检查文件路径是否正确
-- 确保文件格式为支持的类型（CSV、Excel、JSON、TXT）
-- 检查文件是否被其他程序占用
-
-#### 3. API调用失败
-```
-错误: API调用失败，已重试3次
-```
-**解决方案**:
-- 检查网络连接
-- 验证API密钥是否有效
-- 检查API服务状态
-
-#### 4. 内存不足
-```
-错误: 处理大文件时内存不足
-```
-**解决方案**:
-- 分批处理大量数据
-- 增加系统内存
-- 使用选项1处理部分数据作为示例
-
-### 日志查看
-
-详细的运行日志保存在 `scoring_system.log` 文件中：
-```powershell
-# Windows查看日志
-Get-Content scoring_system.log -Tail 50
-
-# Linux/Mac查看日志
-tail -f scoring_system.log
+### 自定义评分模板
+```python
+# 创建评分模板
+template_id = config_manager.create_template(
+    name="算法竞赛专项模板",
+    description="专门用于算法竞赛选拔的评分模板",
+    dimension_ids=["learning_attitude", "self_study", "algorithm", "teamwork", "innovation"],
+    is_default=True,
+    created_by="admin"
+)
 ```
 
 ## 📁 项目结构
 
+JudgeAI 采用 Python Flask API 架构，支持命令行和 REST API 两种使用方式：
+
 ```
-算法竞赛团队AI评分系统/
-├── process_application_form_interactive.py  # 交互式主程序（推荐使用）
-├── main.py                                 # 通用主程序
-├── api_client.py                           # AI评分核心（支持思考功能）
-├── file_reader.py                          # 文件读取和数据解析
-├── result_processor.py                     # 评分结果处理和输出
-├── test_thinking.py                        # AI思考功能测试
-├── read_excel_data.py                      # Excel数据分析工具
-├── requirements.txt                        # 项目依赖包
-├── README.md                              # 本使用说明
-├── ApplicationForm.xlsx                    # 真实申请表数据（91个学生）
-└── output/                                # 输出结果目录
-    ├── 评分结果_时间戳.csv
-    ├── 评分结果_时间戳.xlsx
-    ├── 评分结果_时间戳.json
-    └── 评分报告_时间戳.txt
+JudgeAI/
+├── 🚀 应用入口
+│   ├── quick_start.py                # 一键启动脚本
+│   ├── main.py                       # 命令行工具
+│   └── wsgi.py                       # WSGI入口（gunicorn使用）
+│
+├── 🤖 AI评分引擎
+│   ├── api_client.py                 # 基础API客户端
+│   ├── enhanced_api_client.py        # 增强版API客户端
+│   └── multi_model_support.py        # 多模型支持
+│
+├── ⚡ 核心服务
+│   ├── async_task_manager.py         # 异步任务管理
+│   ├── file_reader.py                # 文件读取
+│   ├── result_processor.py           # 结果处理
+│   └── batch_import.py               # 批量导入
+│
+├── 🔒 安全系统
+│   ├── enhanced_security.py          # 增强安全管理
+│   └── user_management.py            # 用户管理
+│
+├── ⚙️ 配置管理
+│   ├── config_manager.py             # 基础配置管理
+│   └── enhanced_config_manager.py    # 增强配置管理
+│
+├── 🌉 API网关
+│   └── api_gateway.py                # API网关（Flask REST API）
+│
+├── 📊 数据分析
+│   ├── visualization_enhanced.py     # 数据可视化
+│   └── history_manager.py            # 历史管理
+│
+├── 🐳 Docker 部署
+│   ├── Dockerfile                    # Docker镜像定义（多阶段构建）
+│   ├── docker-compose.yml            # Docker Compose编排
+│   └── .dockerignore                 # Docker构建忽略规则
+│
+├── 📚 文档
+│   ├── README.md                     # 主文档（本文档）
+│   ├── CLAUDE.md                     # AI开发助手上下文
+│   ├── API_DOCUMENTATION.md          # API详细文档
+│   └── EXTENSION_GUIDE.md            # 功能扩展指南
+│
+├── 📦 配置文件
+│   ├── requirements.txt              # Python依赖
+│   ├── .env.example                  # 环境变量示例
+│   └── .gitignore                    # Git忽略规则
+│
+└── 📋 数据文件
+    ├── ApplicationForm.xlsx          # 示例数据
+    └── uploads/                      # 上传文件目录
 ```
 
-## 🎯 使用场景
+## 🚀 详细部署指南
 
-### 场景1: 算法竞赛团队选拔
-- 处理大量学生申请表
-- 快速筛选出优秀候选人
-- 生成详细的评估报告
+### 🐍 API服务器部署
 
-### 场景2: 编程能力评估
-- 评估学生的编程基础和学习潜力
-- 识别有培养价值的学生
-- 为后续培训提供参考
+#### 开发环境
+```bash
+# 1. 克隆项目
+git clone https://github.com/Swcmb/JudgeAI.git
+cd JudgeAI
 
-### 场景3: 学术研究
-- 分析学生学习态度和能力分布
-- 研究不同因素对编程能力的影响
-- 生成统计分析报告
+# 2. 创建虚拟环境
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# 或
+venv\Scripts\activate     # Windows
 
-## 🔒 数据安全
+# 3. 安装依赖
+pip install -r requirements.txt
 
-- 所有数据处理均在本地进行
-- API调用仅发送必要的评分信息
-- 不会存储或泄露学生个人隐私信息
-- 支持离线数据分析和处理
+# 4. 设置环境变量
+cp .env.example .env
+# 编辑 .env 文件，填入必要配置：
+# DASHSCOPE_API_KEY=your_api_key
+# JWT_SECRET_KEY=your_jwt_secret
+# ADMIN_USERNAME=admin
+# ADMIN_PASSWORD=admin123
 
-## 📞 技术支持
+# 5. 初始化系统
+python quick_start.py
 
-如果遇到问题，请检查：
-1. Python版本是否为3.8+
-2. 所有依赖包是否正确安装
-3. API密钥是否有效设置
-4. 输入文件格式是否正确
-5. 网络连接是否正常
+# 6. 启动API服务器
+python quick_start.py
+# 选择选项1启动API服务器
+```
 
-## 📝 更新日志
+#### 生产环境
+```bash
+# 1. 安装生产服务器
+pip install gunicorn
 
-### v1.0.0 (2024-12-18)
-- ✅ 完成基础AI评分功能
-- ✅ 支持多种文件格式读取
-- ✅ 实现四维度评分标准
-- ✅ 添加交互式用户界面
-- ✅ 集成深度思考功能
-- ✅ 适配真实申请表数据
-- ✅ 完善错误处理和日志记录
+# 2. 使用Gunicorn启动
+gunicorn -w 4 -b 0.0.0.0:5000 "api_gateway:app"
+
+# 3. Nginx反向代理配置
+# 创建 /etc/nginx/sites-available/judgeapi 文件：
+"""
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    location /api {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+"""
+
+# 4. 启用配置
+sudo ln -s /etc/nginx/sites-available/judgeapi /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+### 🐳 Docker部署
+
+#### API服务器版本
+```bash
+# 1. 构建镜像
+docker build -t judgeai-api:latest .
+
+# 2. 运行容器
+docker run -d \
+  --name judgeai-api \
+  -p 5000:5000 \
+  -e DASHSCOPE_API_KEY="your_api_key" \
+  -e JWT_SECRET_KEY="your_jwt_secret" \
+  -v $(pwd)/data:/app/data \
+  judgeai-api:latest
+
+# 3. 使用Docker Compose
+docker-compose -f docker-compose.api.yml up -d
+```
+
+### ☁️ 云服务部署
+
+#### Railway
+```bash
+# 1. 安装Railway CLI
+npm install -g @railway/cli
+
+# 2. 登录并部署
+railway login
+railway up
+```
+
+#### AWS ECS
+```bash
+# 1. 构建镜像并推送到ECR
+docker build -t judgeai-api:latest .
+docker tag judgeai-api:latest your-account.dkr.ecr.region.amazonaws.com/judgeai-api:latest
+docker push your-account.dkr.ecr.region.amazonaws.com/judgeai-api:latest
+
+# 2. 部署到ECS
+# 使用AWS控制台或CLI创建ECS服务
+```
+
+## 📈 监控与日志
+
+### 日志系统
+- 📝 结构化日志记录
+- 🔄 日志轮转管理
+- 📊 日志级别控制
+- 🔍 错误追踪
+
+### 性能监控
+- 📊 API响应时间监控
+- 🗄️ 数据库性能监控
+- 💾 内存使用监控
+- 🌐 系统资源监控
+
+### 健康检查
+```bash
+# 系统状态检查
+curl http://localhost:5000/api/v1/info
+
+# 数据库连接检查
+curl http://localhost:5000/api/v1/health
+
+# API服务状态检查
+curl http://localhost:5000/api/v1/status
+```
+
+## 🤝 贡献指南
+
+### 开发流程
+1. Fork项目
+2. 创建功能分支
+3. 提交代码
+4. 创建Pull Request
+
+### 代码规范
+- 📝 遵循PEP 8代码风格
+- 🧪 编写单元测试
+- 📚 更新相关文档
+- 🔍 代码审查通过
+
+### 问题反馈
+- 🐛 Bug报告：使用GitHub Issues
+- 💡 功能建议：在Discussions中讨论
+- 📞 技术支持：联系维护团队
+
+## 📄 许可证
+
+本项目采用 [MIT许可证](LICENSE)，详见LICENSE文件。
+
+## 🙏 致谢
+
+- 🚀 [阿里云百炼](https://dashscope.aliyun.com) - 提供强大的AI模型支持
+- 📊 [Plotly](https://plotly.com) - 数据可视化库
+- 🐍 [Flask](https://flask.palletsprojects.com) - API框架
+
+## 📞 联系我们
+
+- 📧 邮箱: support@judgeai.com
+- 🌐 官网: https://judgeai.com
+- 📚 文档: https://docs.judgeai.com
+- 💬 讨论: https://github.com/Swcmb/JudgeAI/discussions
 
 ---
 
-**🎊 开始使用**: 设置API密钥后运行 `python process_application_form_interactive.py` 即可开始体验！
+**⭐ 如果这个项目对你有帮助，请给我们一个Star！**

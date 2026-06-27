@@ -1,0 +1,52 @@
+# ============================================================
+# JudgeAI Docker Compose 配置
+# 启动命令: docker compose up -d
+# 查看日志: docker compose logs -f judgeai-api
+# ============================================================
+
+services:
+  judgeai-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: judgeai-api
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      - FLASK_ENV=${FLASK_ENV:-production}
+      - FLASK_DEBUG=${FLASK_DEBUG:-false}
+      - GUNICORN_WORKERS=${GUNICORN_WORKERS:-4}
+    volumes:
+      - judgeai-data:/app/uploads
+      - judgeai-logs:/app/logs
+      - judgeai-reports:/app/reports
+    networks:
+      - judgeai-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 15s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: "2.0"
+        reservations:
+          memory: 256M
+
+networks:
+  judgeai-net:
+    driver: bridge
+
+volumes:
+  judgeai-data:
+    driver: local
+  judgeai-logs:
+    driver: local
+  judgeai-reports:
+    driver: local

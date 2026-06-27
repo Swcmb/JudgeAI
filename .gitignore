@@ -1,0 +1,60 @@
+# Python 缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+venv/
+.venv/
+env/
+.env/
+
+# 数据库文件
+*.db
+
+# 日志文件
+*.log
+
+# 环境变量（保留示例文件）
+.env
+.env.*
+!.env.example
+
+# 上传文件
+uploads/*
+!uploads/.gitkeep
+
+# 输出目录
+output/
+
+# AI 助手配置
+.codebuddy/
+.kiro/
+
+# IDE 配置
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 测试数据文件
+test_*.csv
+test_*.json
+test_*.txt
+test_*.xlsx
+simple_test.csv
+sample_students*.csv
+test_upload.csv
+security.db
+quick_start.log
+
+# Python 打包产物
+*.egg-info/
+dist/
+build/
+*.egg
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
