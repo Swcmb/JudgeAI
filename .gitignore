@@ -58,3 +58,7 @@ build/
 # 操作系统文件
 .DS_Store
 Thumbs.db
+
+# 真实申请人数据（含个人信息，禁止入库）
+ApplicationForm.xlsx
+uploads/*.xlsx
